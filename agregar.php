@@ -11,8 +11,13 @@ $conn = sqlsrv_connect($db_srv, $connection_options);
 if(!is_resource($conn)){
     echo "ok";
 }
-
-$consecutivo = strtoupper($_POST['id']);
+if($_POST['id'] == "" || strtoupper($_POST['id']) == 'NO TIENE')
+{
+    $consecutivo = 'No tiene';
+}
+else{
+    $consecutivo = strtoupper($_POST['id']);
+}
 $marca = $_POST['marca'];
 $nombre = $_POST['nombre'];
 $sn = strtoupper($_POST['sn']);

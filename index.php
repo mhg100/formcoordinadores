@@ -85,7 +85,7 @@ function llamarCoord(){
 </head>
 <body>
     <div class="container">
-        <form class="form-horizontal" role="form" action="agregar.php" method="post">
+        <form class="form-horizontal" role="form" action="agregar.php" method="post" id="formulario" name="formulario">
             <fieldset class="">
                 <legend align="center">Ingreso de información</legend>
                 <div class="row">
@@ -180,11 +180,17 @@ function llamarCoord(){
                         <input id="sn" name="sn" type="text"  data-toggle="tooltip" data-placement="bottom" title="<br><img src='img/sn.jpg' width='80%' height='80%'><br><br>Verifique el serial que indica la imagen, ubicado al respaldo del control de sonido.<br><br>" placeholder="Serial de fábrica" class="form-control input-md" placeholder="Serial Jabra" class="form-control input-md" required autocomplete="off" disabled>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="position:relative">
                     <label class="col-md-4 control-label" for="id" name="id"></label>
                     <div class="col-md-4 input-group">
                         <span class="input-group-addon" id="basic-addon1"><strong> Consecutivo</strong></span>
-                        <input id="id" name="id" type="text" data-toggle="tooltip" data-placement="bottom" title="<br><img src='img/consecutivo.jpg' width='95%' height='95%'><br><br>Verifique el consecutivo grabado en la bocina de la diadema. Si encuentra más de uno, ingrese el que inicia en ABPS. <br><br>Si no encuentra ninguno, escriba <strong>''no tiene''<strong><br><br>" placeholder="Consecutivo grabado en la bocina" class="form-control input-md" autocomplete="off" required autofocus>
+                        <input id="id" name="id" type="text" data-toggle="tooltip" data-placement="bottom" title="<br><img src='img/consecutivo.jpg' width='95%' height='95%'><br><br>Verifique el consecutivo grabado en la bocina de la diadema. Si encuentra más de uno, ingrese el que inicia en ABPS. <br><br>Si no encuentra ninguno, escriba <strong>''no tiene''<strong><br><br>" placeholder="Consecutivo grabado en la bocina" class="form-control input-md" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="form-group" style="position:relative; top: -20px; max-height:0px" align="right">
+                    <label class="col-md-4 control-label" for="tnt" name="tnt"></label>
+                    <div class="col-md-4 input-group">
+                        <label class="checkbox-inline"><input id="tnt" name="tnt" type="checkbox"> No tiene</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -209,6 +215,16 @@ function llamarCoord(){
         var gral = [];
         var arreglo = [];
         var idcamps = [];
+        
+        $('#tnt').change(function() {
+            if (this.checked) {
+                $("#id").prop("value", "No tiene");
+                $("#id").prop("disabled", true);
+            } else {
+                $("#id").prop("value", "");
+                $("#id").prop("disabled", false);
+            }
+        });
         
         $("#marca").on("changed.bs.select", function (e) {
             var val = $("#marca").val();

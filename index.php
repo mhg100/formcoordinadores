@@ -127,7 +127,7 @@ function llamarCoord(){
                     <label class="col-md-4 control-label" for="campaign"></label>
                     <div class="col-md-4 input-group">
                         <span class="input-group-addon"><strong>&nbsp;&nbsp;&nbsp;Campaña&nbsp;&nbsp;&nbsp;</strong></span>
-                        <select id="campaign" name="campaign" class="form-control" required>
+                        <select id="campaign" name="campaign" class="form-control" required  data-size="7">
                             <option value="" selected disabled>Seleccione su campaña</option>
                         <?php
                             $stmt2 = sqlsrv_query($conn, $sql2);
@@ -148,7 +148,7 @@ function llamarCoord(){
                     <label class="col-md-4 control-label" for="coordinador"></label>
                     <div class="col-md-4 input-group">
                         <span class="input-group-addon"><strong> Coordinador</strong></span>
-                        <select id="coordinador" name="coordinador" class="form-control" required>
+                        <select id="coordinador" name="coordinador" class="form-control" required  data-size="7" >
                             <option value="" selected disabled>Seleccione su coordinador</option>
                             <?php
                                 while($row = sqlsrv_fetch_array($stmt2, SQLSRV_FETCH_ASSOC))

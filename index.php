@@ -44,6 +44,7 @@ for($i = 0; $i < count($campaigns); $i++)
 function llamarCoord(){
     global $camp;
     $indices = array_keys($camp);
+
     for($i = 0; $i < count($indices); $i++){
         $idcamp = $indices[$i];
         echo "idcamps.push(".$idcamp.");";
@@ -127,7 +128,7 @@ function llamarCoord(){
                     <label class="col-md-4 control-label" for="campaign"></label>
                     <div class="col-md-4 input-group">
                         <span class="input-group-addon"><strong>&nbsp;&nbsp;&nbsp;Campaña&nbsp;&nbsp;&nbsp;</strong></span>
-                        <select id="campaign" name="campaign" class="form-control" required  data-size="7">
+                        <select id="campaign" name="campaign" class="form-control" required data-size="7" autofocus>
                             <option value="" selected disabled>Seleccione su campaña</option>
                         <?php
                             $stmt2 = sqlsrv_query($conn, $sql2);
@@ -148,8 +149,8 @@ function llamarCoord(){
                     <label class="col-md-4 control-label" for="coordinador"></label>
                     <div class="col-md-4 input-group">
                         <span class="input-group-addon"><strong> Coordinador</strong></span>
-                        <select id="coordinador" name="coordinador" class="form-control" required  data-size="7" >
-                            <option value="" selected disabled>Seleccione su coordinador</option>
+                        <select id="coordinador" name="coordinador" class="form-control" required>
+                            <option value="" selected disabled>Primero seleccione su campaña</option>s
                             <?php
                                 while($row = sqlsrv_fetch_array($stmt2, SQLSRV_FETCH_ASSOC))
                                 {
@@ -184,7 +185,7 @@ function llamarCoord(){
                     <label class="col-md-4 control-label" for="id" name="id"></label>
                     <div class="col-md-4 input-group">
                         <span class="input-group-addon" id="basic-addon1"><strong> Consecutivo</strong></span>
-                        <input id="id" name="id" type="text" data-toggle="tooltip" data-placement="bottom" title="<br><img src='img/consecutivo.jpg' width='95%' height='95%'><br><br>Verifique el consecutivo grabado en la bocina de la diadema. Si encuentra más de uno, ingrese el que inicia en ABPS. <br><br>Si no encuentra ninguno, escriba <strong>''no tiene''<strong><br><br>" placeholder="Consecutivo grabado en la bocina" class="form-control input-md" autocomplete="off" required>
+                        <input id="id" name="id" type="text" data-toggle="tooltip" data-placement="bottom" title="<br>Verifique el consecutivo grabado en la bocina de la diadema. Si encuentra más de uno, ingrese el que inicia en ABPS. <br><br><img src='img/consecutivo.jpg' width='95%' height='95%'><br><br>Si no encuentra ninguno, seleccione la casilla siguiente.<br><br>" placeholder="Consecutivo grabado en la bocina" class="form-control input-md" autocomplete="off" required>
                     </div>
                 </div>
                 <div class="form-group" style="position:relative; top: -20px; max-height:0px" align="right">
@@ -197,7 +198,7 @@ function llamarCoord(){
                     <label class="col-md-4 control-label" for="nombre"></label>
                     <div class="col-md-4 input-group">
                         <span class="input-group-addon">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <input id="nombre" name="nombre" type="text" data-toggle="tooltip" data-placement="top" title="<br><img src='img/ejip.jpg' width='80%' height='80%'><br><br>Ingrese su nombre completo. Si la diadema está fija al equipo, ingrese la dirección IP del computador.<br><br>" placeholder="Nombre del agente o IP del equipo" class="form-control input-md" required autocomplete="off">
+                        <input id="nombre" name="nombre" type="text" data-toggle="tooltip" data-placement="top" title="<br>Ingrese su nombre completo.<br><br>" placeholder="Su nombre" class="form-control input-md" required autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group">
@@ -254,7 +255,9 @@ function llamarCoord(){
         $('#campaign').change(function () {
             $lacamp = $( "#campaign option:selected" ).val();
             $("#coordinador").empty();
+            $("#coordinador").val("Seleccione su coordinador");
             $("#coordinador").append(gral[$lacamp]);
+            $("#coordinador").prepend("<option value='' selected='selected' disabled>Seleccione su coordinador</option>");
         });
         
         </script>

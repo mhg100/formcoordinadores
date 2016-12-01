@@ -26,20 +26,22 @@ $coord= $_POST['coordinador'];
 $dirip = $_SERVER['REMOTE_HOST'];
 
 $nombre = iconv('UTF-8', 'ISO-8859-1', $nombre);
+$nombre = mb_strtoupper($nombre, 'UTF-8');
 
 echo $consecutivo; 
 echo $marca;
 echo $nombre;
 echo $sn;
 
-$sql = "insert into inventariodiademas (consecutivo, marca, nombre, serial, coordinador, campaign, ip_equipo) values (
+$sql = "insert into inventariodiademas (consecutivo, marca, nombre, serial, coordinador, campaign, ip_equipo, fecha) values (
       '".$consecutivo."', 
       '".$marca."', 
       '".$nombre."', 
       '".$sn."', 
       '".$coord."', 
       '".$camp."', 
-      '".$dirip."')";
+      '".$dirip."', 
+      GETDATE())";
 
 $stmt = sqlsrv_query($conn, $sql);
 $url = 'Location: index.php?do=1';

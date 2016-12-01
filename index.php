@@ -23,9 +23,9 @@ while($camp = sqlsrv_fetch_array($stmt2, SQLSRV_FETCH_ASSOC))
     {
         if($coord["campaign_coordinador"] == $camp["id_campaign"])
         {
-            $nombre = $coord['nombres_coordinador']." ".$coord['apellidos_coordinador'];
+            $nombre = utf8_encode(ucwords(strtolower($coord['nombres_coordinador'])))." ".utf8_encode(ucwords(strtolower(ucwords($coord['apellidos_coordinador']))));
             $pushable = ("$('<option></option>').");
-            $pushable = $pushable.'attr("value", "'.$coord['id_coordinador'].'").text("'.$nombre.'")';
+            $pushable = $pushable.'attr("value", "'.$coord['id_coordinador'].'").text("'.ucwords($nombre).'")';
             array_push($coordinadores, $pushable);
         }
     }
@@ -134,10 +134,8 @@ function llamarCoord(){
                             $stmt2 = sqlsrv_query($conn, $sql2);
                             while($row = sqlsrv_fetch_array($stmt2, SQLSRV_FETCH_ASSOC))
                             {
-                                $nombre = $row['nombres_coordinador']." ".$row['apellidos_coordinador'];
-                                $campana= $row['id_campaign'];
                                 
-                                echo '                    <option value="'.$row['id_campaign'].'">'.$row['nombre_campaign'].'</option>';
+                                echo '                    <option value="'.$row['id_campaign'].'">'.utf8_encode($row['nombre_campaign']).'</option>';
                                 echo "\xA";
                             }
                             sqlsrv_free_stmt($stmt2);
@@ -151,13 +149,6 @@ function llamarCoord(){
                         <span class="input-group-addon"><strong> Coordinador</strong></span>
                         <select id="coordinador" name="coordinador" class="form-control" required>
                             <option value="" selected disabled>Primero seleccione su campaña</option>s
-                            <?php
-                                while($row = sqlsrv_fetch_array($stmt2, SQLSRV_FETCH_ASSOC))
-                                {
-                                    echo '                    <option value="'.$row['id_campaign'].'">'.$row['nombre_campaign'].'</option>';
-                                }
-                                sqlsrv_free_stmt($stmt1);
-                            ?>
                         </select>
                     </div>
                 </div>

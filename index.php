@@ -176,7 +176,7 @@ function llamarCoord(){
                     <label class="col-md-4 control-label" for="id" name="id"></label>
                     <div class="col-md-4 input-group">
                         <span class="input-group-addon" id="basic-addon1"><strong> Consecutivo</strong></span>
-                        <input id="id" name="id" type="text" data-toggle="tooltip" data-placement="bottom" title="<br>Verifique el consecutivo grabado en la bocina de la diadema. Si encuentra más de uno, ingrese el que inicia en ABPS. <br><br><img src='img/consecutivo.jpg' width='95%' height='95%'><br><br>Si no encuentra ninguno, seleccione la casilla siguiente.<br><br>" placeholder="Consecutivo grabado en la bocina" class="form-control input-md" autocomplete="off" required>
+                        <input id="id" name="id" type="text" data-toggle="tooltip" data-placement="top" title="<br>Verifique el consecutivo grabado en la bocina de la diadema. Si encuentra más de uno, ingrese el que inicia en ABPS. <br><br><img src='img/consecutivo.jpg' width='95%' height='95%'><br><br>Si no encuentra ninguno, seleccione la casilla siguiente.<br><br>" placeholder="Consecutivo grabado en la bocina" class="form-control input-md" autocomplete="off" required>
                     </div>
                 </div>
                 <div class="form-group" style="position:relative; top: -20px; max-height:0px" align="right">

@@ -37,7 +37,7 @@ $sql = "insert into inventariodiademas (consecutivo, marca, nombre, serial, coor
       '".$dirip."', 
       GETDATE())";
 $stmt = sqlsrv_query($conn, $sql);
-$url = 'Location: index.php?do=1';
+$url = 'Location: http://172.27.48.125/extcargardiademas.php';
 if(!stmt)
 {
     die('MSSQL error: ' . mssql_get_last_message());

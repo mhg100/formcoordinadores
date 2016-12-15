@@ -47,18 +47,18 @@ function llamarCoord(){
 
     for($i = 0; $i < count($indices); $i++){
         $idcamp = $indices[$i];
-        echo "idcamps.push(".$idcamp.");";
+        echo "idcamps.push(".$idcamp.");\xA        ";
         
         $pushable = ("$('<option></option>').");
         $pushable = $pushable.'attr("value", "'.$idcamp.'").text("'.$idcamp.'")';
         
-        echo "idcamps.push(".$pushable."); ";
+        echo "idcamps.push(".$pushable."); \xA        ";
                 
         for($j = 0; $j < count($camp[$idcamp]); $j++){
-            echo "    arreglo.push(".$camp[$idcamp][$j].");";
+            echo "arreglo.push(".$camp[$idcamp][$j].");\xA        ";
         }
-        echo "    gral[".$idcamp."] = arreglo;";
-        echo "    arreglo = [];";
+        echo "gral[".$idcamp."] = arreglo;\xA        ";
+        echo "arreglo = [];\xA\xA        ";
     }
     
 }
@@ -92,35 +92,23 @@ function llamarCoord(){
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <?php
-                        
-                        if(isset($_GET['do']))
-                        {
-                            if($_GET['do'] == 1)
-                            {
-                                //echo '<h3>Registro agregado correctamente</h3>';
-                                echo '<div class="alert alert-success" role="alert">';
-                                echo '  <strong>Dispositivo agregado correctamente.</strong>';
-                                echo '</div>';
-                            }
-                            else if($_GET['do'] == 0)
-                            {
-                                //echo '<h3>Error al realizar la operación</h3>';
-                                echo '<div class="alert alert-danger" role="alert">';
-                                echo '    <strong>No se agregó el dispositivo.</strong>';
-                                echo '</div>';
-                            }
-                            else
-                            {
+                        if(isset($_GET['do'])) {
+                            if($_GET['do'] == 1) {
+                                echo '<div class="alert alert-success" role="alert">'."\xA";
+                                echo '                            <strong>Dispositivo agregado correctamente.</strong>'."\xA";
+                                echo '                        </div>'."\xA";
+                            }else if($_GET['do'] == 0) {
+                                echo '<div class="alert alert-danger" role="alert">'."\xA";
+                                echo '    <strong>No se agregó el dispositivo.</strong>'."\xA";
+                                echo '</div>'."\xA";
+                            }else{
                                 echo '<h3>&nbsp;</h3>';
                                 echo '<br>';
                             }
-                        }
-                        else
-                        {
+                        }else{
                             echo '<h3>&nbsp;</h3>';
                             echo '<br>';
                         }
-                        
                         ?>
                     </div>
                 </div>
@@ -134,13 +122,13 @@ function llamarCoord(){
                             $stmt2 = sqlsrv_query($conn, $sql2);
                             while($row = sqlsrv_fetch_array($stmt2, SQLSRV_FETCH_ASSOC))
                             {
-                                
-                                echo '                    <option value="'.$row['id_campaign'].'">'.utf8_encode($row['nombre_campaign']).'</option>';
-                                echo "\xA";
+                                echo '    <option value="'.$row['id_campaign'].'">'.utf8_encode($row['nombre_campaign']).'</option>'."\xA";
+                                if(next($row)) echo '                        ';
+                                else echo '';
                             }
                             sqlsrv_free_stmt($stmt2);
                         ?>
-                        </select>
+</select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -152,7 +140,6 @@ function llamarCoord(){
                         </select>
                     </div>
                 </div>
-                
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="marc"></label>
                     <div class="col-md-4 input-group">
@@ -203,11 +190,9 @@ function llamarCoord(){
         </form>
     </div>
     <script>
-        
         var gral = [];
         var arreglo = [];
         var idcamps = [];
-        
         $('#tnt').change(function() {
             if (this.checked) {
                 $("#id").prop("value", "No tiene");
@@ -217,17 +202,10 @@ function llamarCoord(){
                 $("#id").prop("disabled", false);
             }
         });
-        
         $("#marca").on("changed.bs.select", function (e) {
             var val = $("#marca").val();
-            if(val == "jabra")
-            {
-                $("#sn").prop("disabled", false);
-            }
-            else
-            {
-                $("#sn").prop("disabled", true);
-            }
+            if (val == "jabra") $("#sn").prop("disabled", false);
+            else                $("#sn").prop("disabled", true);
         });
         $(document).ready(function(){
             $('[data-toggle="tooltip"]').tooltip({
@@ -238,19 +216,15 @@ function llamarCoord(){
             });
             $('[data-toggle="tooltip"]').tooltip().off("focusin focusout");
         });
-        
         <?php
             llamarCoord();
-        ?>
-
-        $('#campaign').change(function () {
-            $lacamp = $( "#campaign option:selected" ).val();
+        ?>$('#campaign').change(function () {
+            $lacamp = $("#campaign option:selected").val();
             $("#coordinador").empty();
             $("#coordinador").val("Seleccione su coordinador");
             $("#coordinador").append(gral[$lacamp]);
             $("#coordinador").prepend("<option value='' selected='selected' disabled>Seleccione su coordinador</option>");
         });
-        
-        </script>
+    </script>
 </body>
 </html>
